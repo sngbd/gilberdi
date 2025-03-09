@@ -120,7 +120,7 @@ header =
                                     }
                                 , R.p
                                     { className: "text-xl text-black mb-8"
-                                    , children: [ R.text "Software Engineer & Competitive Programmer" ]
+                                    , children: [ R.text "Software Engineer" ]
                                     }
                                 , R.div
                                     { className: "mb-4 typewriter delay-2"
@@ -337,6 +337,11 @@ projects =
                     { className: "grid md:grid-cols-2 gap-8 mt-8"
                     , children:
                         [ projectItem 
+                            "Gilberdi's Portfolio" 
+                            "This website."
+                            [ "PureScript", "Tailwind CSS" ]
+                            "https://github.com/sngbd/gilberdi"
+                        , projectItem 
                             "Decodream" 
                             "IC-blockchain-based platform that transforms dreams into digital art using AI technology."
                             [ "React.js", "Motoko", "Sass" ]
@@ -351,11 +356,6 @@ projects =
                             "Generate a collage based on Letterboxd user's latest diary."
                             [ "Go", "Svelte" ]
                             "https://github.com/sngbd/last-boxd"
-                        , projectItem 
-                            "GBKP KMKJ" 
-                            "A digital platform for a church office."
-                            [ "Next.js", "Prismic" ]
-                            "https://github.com/sngbd/gbkp-kmkj"
                         ]
                     }
                 ]

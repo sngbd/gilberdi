@@ -13,15 +13,17 @@ to generate this file without the comments in this block.
 { sources = [ "src/**/*.purs", "test/**/*.purs" ]
 , name = "my-project"
 , dependencies =
-  ["console"
+  [ "console"
   , "effect"
   , "maybe"
   , "prelude"
   , "react-basic"
   , "react-basic-dom"
   , "react-basic-hooks"
-  , "web-html"
+  , "strings"
   , "web-dom"
+  , "web-events"
+  , "web-html"
   ]
 , packages = ./packages.dhall
 }

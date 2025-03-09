@@ -3,6 +3,7 @@ body {
   background-color: #fff;
   color: #000;
   font-family: "Space Mono", "Courier New", monospace;
+  line-height: 1.6;
 }
 
 .typewriter {
@@ -37,10 +38,13 @@ body {
   color: #fff;
 }
 
+.border {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
 .border:hover {
   transform: translate(-2px, -2px);
   box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .dot-perspective {
@@ -60,6 +64,7 @@ body {
 section {
   position: relative;
   transition: background-color 0.3s;
+  padding: 4rem 1rem;
 }
 
 @media (max-width: 768px) {
@@ -69,5 +74,136 @@ section {
   
   .terminal-content {
     padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  .typewriter {
+    font-size: 0.9rem;
+    white-space: normal;
+    animation: none;
+    border-right: none;
+  }
+  
+  .container {
+    width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .p-6 {
+    padding: 1rem !important;
+  }
+  
+  .social-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  nav {
+    padding: 0.5rem;
+  }
+  
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  .mobile-menu {
+    position: fixed;
+    top: 0;           /* Start from the top of the screen */
+    left: 0;          /* Extend across the full width */
+    width: 100%;      /* Full width */
+    height: 100vh;    /* Full viewport height */
+    background: white;
+    transform: translateY(-100%); /* Initially hidden above the screen */
+    transition: transform 0.3s ease; /* Smooth slide-down animation */
+    z-index: 50;      /* Ensure it’s above the navbar (z-index: 40) */
+    display: flex;    /* Use flexbox to center content */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-menu .flex {
+    padding: 0;
+  }
+  
+  .mobile-menu.open {
+    transform: translateY(0); /* Slide down to visible position */
+  }
+  
+  .mobile-menu a {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body.dark-mode-enabled {
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+  
+  body.dark-mode-enabled .bg-white {
+    background-color: #1e1e1e;
+  }
+  
+  body.dark-mode-enabled .text-black {
+    color: #f0f0f0;
+  }
+  
+  body.dark-mode-enabled .border-black {
+    border-color: #333;
+  }
+  
+  body.dark-mode-enabled .text-gray-600,
+  body.dark-mode-enabled .text-gray-700,
+  body.dark-mode-enabled .text-gray-800 {
+    color: #aaa;
+  }
+}
+
+a:focus, button:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-to-content:focus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: white;
+  color: black;
+  z-index: 9999;
+}
+
+@media print {
+  .terminal-window {
+    box-shadow: none !important;
+  }
+  
+  .dot-perspective {
+    display: none;
+  }
+  
+  nav {
+    position: relative !important;
   }
 }

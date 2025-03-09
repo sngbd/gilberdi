@@ -11,19 +11,49 @@ import React.Basic.Hooks as React
 import React.Basic.Hooks (Component, component, useState, (/\))
 import React.Basic.Events (handler_)
 import Web.DOM.NonElementParentNode (getElementById)
-import Web.HTML (window)
 import Web.HTML.HTMLDocument (toNonElementParentNode)
-import Web.HTML.Window (document)
+import Data.String (drop)
+import Web.HTML (window)
+import Web.HTML.Window (document, location, toEventTarget)
+import Web.HTML.Location (hash)
+import Web.Event.EventTarget (EventListener, eventListener, addEventListener, removeEventListener)
+import Web.Event.Event (Event, EventType(..))
 
 mkApp :: Component Unit
 mkApp = do
   component "App" \_ -> React.do
     activeSection /\ setActiveSection <- useState "home"
+    mobileMenuOpen /\ setMobileMenuOpen <- useState false
+
+    let handler :: Event -> Effect Unit
+        handler _ = do
+          win' <- window
+          loc' <- location win'
+          currentHash <- hash loc'
+          let currentSection = if currentHash == "" then "home" else drop 1 currentHash
+          setActiveSection (const currentSection)
+
+    let listener :: Effect EventListener
+        listener = eventListener handler
+
+    React.useEffect unit do
+      win <- window
+      loc <- location win
+      initialHash <- hash loc
+      let initialSection = if initialHash == "" then "home" else drop 1 initialHash
+      setActiveSection (const initialSection)
+
+      actualListener <- listener
+      let winEventTarget = toEventTarget win
+      addEventListener (EventType "hashchange") actualListener false winEventTarget
+      pure $ removeEventListener (EventType "hashchange") actualListener false winEventTarget
+
 
     pure $ R.div
       { className: "min-h-screen bg-white text-black font-mono"
       , children:
-          [ navbar activeSection (\newSection -> setActiveSection (const newSection))
+          [ navbar activeSection (\newSection -> setActiveSection (const newSection)) mobileMenuOpen (\newValue -> setMobileMenuOpen (const newValue))
+          , skipToContent
           , header
           , about
           , experience
@@ -34,8 +64,16 @@ mkApp = do
           ]
       }
 
-navbar :: String -> (String -> Effect Unit) -> React.JSX
-navbar activeSection setActiveSection =
+skipToContent :: React.JSX
+skipToContent =
+  R.a
+    { className: "skip-to-content"
+    , href: "#home"
+    , children: [ R.text "Skip to content" ]
+    }
+
+navbar :: String -> (String -> Effect Unit) -> Boolean -> (Boolean -> Effect Unit) -> React.JSX
+navbar activeSection setActiveSection mobileMenuOpen setMobileMenuOpen =
   R.nav
     { className: "fixed w-full bg-white border-b border-black z-40"
     , children:
@@ -57,6 +95,27 @@ navbar activeSection setActiveSection =
                         , navItem "CONTACT" "contact" activeSection setActiveSection
                         ]
                     }
+                , R.button
+                    { className: "md:hidden p-2 border border-black"
+                    , onClick: handler_ (setMobileMenuOpen (not mobileMenuOpen))
+                    , children: [ R.text (if mobileMenuOpen then "✕" else "☰") ]
+                    }
+                ]
+            }
+        , R.div
+            { className: "mobile-menu md:hidden" <> if mobileMenuOpen then " open" else ""
+            , children:
+                [ R.div
+                    { className: "flex flex-col items-center space-y-6" -- Updated classes
+                    , children:
+                        [ mobileNavItem "HOME" "home" activeSection setActiveSection setMobileMenuOpen
+                        , mobileNavItem "ABOUT" "about" activeSection setActiveSection setMobileMenuOpen
+                        , mobileNavItem "EXPERIENCE" "experience" activeSection setActiveSection setMobileMenuOpen
+                        , mobileNavItem "PROJECTS" "projects" activeSection setActiveSection setMobileMenuOpen
+                        , mobileNavItem "SKILLS" "skills" activeSection setActiveSection setMobileMenuOpen
+                        , mobileNavItem "CONTACT" "contact" activeSection setActiveSection setMobileMenuOpen
+                        ]
+                    }
                 ]
             }
         ]
@@ -72,6 +131,18 @@ navItem label id activeSection setActiveSection =
     , children: [ R.text (">" <> label) ]
     }
 
+mobileNavItem :: String -> String -> String -> (String -> Effect Unit) -> (Boolean -> Effect Unit) -> React.JSX
+mobileNavItem label id activeSection setActiveSection setMobileMenuOpen =
+  R.a
+    { className: "cursor-pointer hover:text-gray-600 transition-colors duration-200 py-4 text-lg " 
+                 <> if activeSection == id then "text-black font-bold" else "text-gray-800"
+    , onClick: handler_ do
+        setActiveSection id
+        setMobileMenuOpen false
+    , href: "#" <> id
+    , children: [ R.text (">" <> label) ]
+    }
+
 header :: React.JSX
 header =
   R.header
@@ -82,7 +153,7 @@ header =
             { className: "container mx-auto relative z-20"
             , children:
                 [ R.div
-                    { className: "max-w-2xl terminal-window"
+                    { className: "max-w-2xl mx-auto terminal-window"
                     , children:
                         [ R.div
                             { className: "terminal-header px-4 py-2 bg-white border-b border-black flex items-center"
@@ -111,7 +182,7 @@ header =
                                     , children: [ R.text "> whoami" ]
                                     }
                                 , R.h1
-                                    { className: "text-4xl font-bold mb-4"
+                                    { className: "text-4xl md:text-4xl font-bold mb-4"
                                     , children: [ R.text "Gilberdi Axel Nathaniel Sinaga" ]
                                     }
                                 , R.div
@@ -127,7 +198,7 @@ header =
                                     , children: [ R.text "> find ./contact -type f -name \"*.link\"" ]
                                     }
                                 , R.div
-                                    { className: "flex space-x-4"
+                                    { className: "flex flex-wrap gap-4 social-buttons"
                                     , children:
                                         [ socialButton "GitHub" "https://github.com/sngbd"
                                         , socialButton "LinkedIn" "https://linkedin.com/in/gilberdi"
@@ -141,7 +212,7 @@ header =
                 ]
             }
         , R.div
-            { className: "absolute top-0 left-0 w-full h-full"
+            { className: "absolute top-0 left-0 w-full h-full dot-background"
             , style: R.css
                 { backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)"
                 , backgroundSize: "20px 20px"
@@ -174,7 +245,7 @@ about =
                     { className: "grid md:grid-cols-2 gap-8 mt-8"
                     , children:
                         [ R.div
-                            { className: "bg-white p-6 border border-black"
+                            { className: "bg-white p-4 md:p-6 border border-black card-hover"
                             , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
                             , children:
                                 [ R.div
@@ -194,7 +265,7 @@ about =
                                 ]
                             }
                         , R.div
-                            { className: "bg-white p-6 border border-black"
+                            { className: "bg-white p-4 md:p-6 border border-black card-hover"
                             , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
                             , children:
                                 [ R.div
@@ -239,10 +310,10 @@ educationItem school degree duration gpa =
             , children: [ R.text degree ]
             }
         , R.div
-          { className: "flex justify-between text-sm text-gray-600 mt-1"
+          { className: "flex flex-col sm:flex-row sm:justify-between text-sm text-gray-600 mt-1"
           , children:
               [ R.span { children: [ R.text duration ] }
-              , R.span { children: [ R.text gpa ] }
+              , R.span { className: "mt-1 sm:mt-0", children: [ R.text gpa ] }
               ]
           }
         ]
@@ -292,7 +363,7 @@ experience =
 experienceItem :: String -> String -> String -> Array String -> React.JSX
 experienceItem company position duration descriptions =
   R.div
-    { className: "bg-white p-6 border border-black relative overflow-hidden"
+    { className: "bg-white p-4 md:p-6 border border-black relative overflow-hidden card-hover"
     , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
     , children:
         [ R.div
@@ -370,7 +441,7 @@ projectItem title description technologies githubUrl =
     { href: githubUrl
     , target: "_blank"
     , rel: "noopener noreferrer"
-    , className: "block bg-white p-6 border border-black transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+    , className: "block bg-white p-4 md:p-6 border border-black transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg card-hover"
     , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
     , children:
         [ R.div
@@ -443,7 +514,7 @@ skillsSection =
 skillCategory :: String -> Array String -> React.JSX
 skillCategory category skills =
   R.div
-    { className: "bg-white p-6 border border-black"
+    { className: "bg-white p-4 md:p-6 border border-black card-hover"
     , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
     , children:
         [ R.div
@@ -477,7 +548,7 @@ contact =
             , children:
                 [ sectionTitle "CONTACT"
                 , R.div
-                    { className: "mt-8 max-w-xl mx-auto bg-white p-8 border border-black"
+                    { className: "mt-8 max-w-xl mx-auto bg-white p-4 md:p-8 border border-black card-hover"
                     , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
                     , children:
                         [ R.div
@@ -507,14 +578,14 @@ contact =
 contactItem :: String -> String -> React.JSX
 contactItem label value =
   R.div
-    { className: "flex items-center justify-between p-3 bg-white border border-black"
+    { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 bg-white border border-black"
     , children:
         [ R.span
-            { className: "font-bold text-gray-600"
+            { className: "font-bold text-gray-600 mb-1 sm:mb-0"
             , children: [ R.text label ]
             }
         , R.span
-            { className: "text-black monospace"
+            { className: "text-black monospace break-all"
             , children: [ R.text value ]
             }
         ]
@@ -559,14 +630,7 @@ sectionTitle title =
 addDotPerspective :: React.JSX
 addDotPerspective = 
   R.div
-    { className: "absolute bottom-0 left-0 w-full h-48 pointer-events-none"
-    , style: R.css
-        { backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)"
-        , backgroundSize: "20px 20px"
-        , transform: "perspective(500px) rotateX(60deg)"
-        , transformOrigin: "bottom"
-        , opacity: 0.2
-        }
+    { className: "dot-perspective"
     }
 
 main :: Effect Unit

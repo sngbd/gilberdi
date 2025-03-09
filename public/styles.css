@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+  font-family: "Space Mono", "Courier New", monospace;
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: 0.15em solid #000;
+  white-space: nowrap;
+  margin: 0;
+  letter-spacing: 0.15em;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+.delay-1 {
+  animation-delay: 1s;
+}
+
+.delay-2 {
+  animation-delay: 2s;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #000 }
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+.border:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dot-perspective {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background-image: radial-gradient(circle, #000 1px, transparent 1px);
+  background-size: 20px 20px;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: bottom;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+section {
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+@media (max-width: 768px) {
+  .dot-perspective {
+    height: 100px;
+  }
+  
+  .terminal-content {
+    padding: 1rem;
+  }
+}

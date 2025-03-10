@@ -106,20 +106,32 @@ navbar activeSection setActiveSection mobileMenuOpen setMobileMenuOpen =
             { className: "mobile-menu md:hidden" <> if mobileMenuOpen then " open" else ""
             , children:
                 [ R.div
-                    { className: "flex flex-col items-center space-y-6" -- Updated classes
+                    { className: "flex flex-col justify-center w-full h-full"
                     , children:
-                        [ mobileNavItem "HOME" "home" activeSection setActiveSection setMobileMenuOpen
-                        , mobileNavItem "ABOUT" "about" activeSection setActiveSection setMobileMenuOpen
-                        , mobileNavItem "EXPERIENCE" "experience" activeSection setActiveSection setMobileMenuOpen
-                        , mobileNavItem "PROJECTS" "projects" activeSection setActiveSection setMobileMenuOpen
-                        , mobileNavItem "SKILLS" "skills" activeSection setActiveSection setMobileMenuOpen
-                        , mobileNavItem "CONTACT" "contact" activeSection setActiveSection setMobileMenuOpen
+                        [ R.button
+                            { className: "absolute top-4 right-4 p-2 text-2xl"
+                            , onClick: handler_ (setMobileMenuOpen false)
+                            , children: [ R.text "✕" ]
+                            }
+                        , R.div
+                            { className: "flex flex-col items-center space-y-6 pt-16"
+                            , children:
+                                [ mobileNavItem "HOME" "home" activeSection setActiveSection setMobileMenuOpen
+                                , mobileNavItem "ABOUT" "about" activeSection setActiveSection setMobileMenuOpen
+                                , mobileNavItem "EXPERIENCE" "experience" activeSection setActiveSection setMobileMenuOpen
+                                , mobileNavItem "PROJECTS" "projects" activeSection setActiveSection setMobileMenuOpen
+                                , mobileNavItem "SKILLS" "skills" activeSection setActiveSection setMobileMenuOpen
+                                , mobileNavItem "CONTACT" "contact" activeSection setActiveSection setMobileMenuOpen
+                                ]
+                            }
                         ]
                     }
                 ]
             }
         ]
     }
+
+
 
 navItem :: String -> String -> String -> (String -> Effect Unit) -> React.JSX
 navItem label id activeSection setActiveSection =
@@ -371,7 +383,7 @@ experienceItem company position duration descriptions =
             , children: [ R.text "$ history | grep work" ]
             }
         , R.h3
-            { className: "text-xl font-bold mb-1 text-black"
+            { className: "text-xl font-bold mb-1 text-black mt-6 md:mt-0"
             , children: [ R.text company ]
             }
         , R.div
@@ -383,7 +395,7 @@ experienceItem company position duration descriptions =
             , children: [ R.text duration ]
             }
         , R.ul
-            { className: "space-y-2 text-black"
+            { className: "space-y-2 text-black mb-3 md:mb-0"
             , children: map (\desc -> 
                 R.li 
                   { className: "relative pl-5 before:content-['$'] before:absolute before:left-0 before:text-gray-500"

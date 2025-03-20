@@ -18,9 +18,14 @@ header =
                         [ R.div
                             { className: "terminal-header px-4 py-2 bg-white border-b border-black flex items-center"
                             , children:
-                                [ R.div { className: "w-3 h-3 bg-black mr-2 rounded-full" }
-                                , R.div { className: "w-3 h-3 bg-black mr-2 rounded-full" }
-                                , R.div { className: "w-3 h-3 bg-black mr-2 rounded-full" }
+                                [ R.div 
+                                    { className: "dot-container mr-4"
+                                    , children:
+                                        [ R.div { className: "dot solarized-red animate-dots-pulse" }
+                                        , R.div { className: "dot solarized-yellow animate-dots-pulse" }
+                                        , R.div { className: "dot solarized-green animate-dots-pulse" }
+                                        ]
+                                    }
                                 , R.div
                                     { className: "text-xs text-center flex-grow text-black"
                                     , children: [ R.text "user@portfolio:~" ]
@@ -29,16 +34,16 @@ header =
                             }
                         , R.div
                             { className: "terminal-content p-4 bg-white border border-black"
-                            , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
+                            , style: R.css { boxShadow: "8px 8px 0 rgba(88,110,117,0.2)" }
                             , children:
-                                [ R.div { className: "mb-4 typewriter", children: [ R.text "> whoami" ] }
+                                [ R.div { className: "mb-4 typewriter solarized-green", children: [ R.text "> whoami" ] }
                                 , R.h1
-                                    { className: "text-4xl md:text-4xl font-bold mb-4"
+                                    { className: "text-4xl md:text-4xl font-bold mb-4 solarized-magenta"
                                     , children: [ R.text "Gilberdi Axel Nathaniel Sinaga" ]
                                     }
-                                , R.div { className: "mb-4 typewriter delay-1", children: [ R.text "> cat skills.txt" ] }
-                                , R.p { className: "text-xl text-black mb-8", children: [ R.text "Software Engineer" ] }
-                                , R.div { className: "mb-4 typewriter delay-2", children: [ R.text "> find ./contact -type f -name \"*.link\"" ] }
+                                , R.div { className: "mb-4 typewriter delay-1 solarized-yellow", children: [ R.text "> cat titles.txt" ] }
+                                , R.p { className: "text-xl text-black mb-8 solarized-cyan", children: [ R.text "Software Engineer | Computer Science Student" ] }
+                                , R.div { className: "mb-4 typewriter delay-2 solarized-blue", children: [ R.text "> find ./contact -type f -name \"*.link\"" ] }
                                 , R.div
                                     { className: "flex flex-wrap gap-4 social-buttons"
                                     , children:
@@ -54,11 +59,7 @@ header =
                 ]
             }
         , R.div
-            { className: "absolute top-0 left-0 w-full h-full dot-background"
-            , style: R.css
-                { backgroundImage: "radial-gradient(circle, #000 1px, transparent 1px)"
-                , backgroundSize: "20px 20px"
-                }
+            { className: "dot-background absolute bottom-0 left-0 w-full"
             }
         ]
     }

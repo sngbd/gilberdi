@@ -1,5 +1,4 @@
 module Components.Common (sectionTitle, addDotPerspective) where
-
 import Prelude
 import React.Basic.DOM as R
 import React.Basic.Hooks as React
@@ -10,11 +9,11 @@ sectionTitle title =
     { className: "relative"
     , children:
         [ R.div
-            { className: "mb-2 text-gray-600 text-sm"
+            { className: "mb-2 text-gray-600 text-sm solarized-violet"
             , children: [ R.text ("$ cd /" <> title <> " && ls") ]
             }
         , R.h2
-            { className: "text-3xl font-bold inline-block text-black"
+            { className: "text-3xl font-bold inline-block text-black solarized-magenta"
             , children: [ R.text title ]
             }
         , R.div

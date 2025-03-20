@@ -1,13 +1,11 @@
 module Components.Footer (footer) where
-
 import React.Basic.DOM as R
 import React.Basic.Hooks as React
-
 
 footer :: React.JSX
 footer =
   R.footer
-    { className: "py-8 px-4 bg-white border-t border-black relative"
+    { className: "py-8 px-4 border-t bg-white border-black relative"
     , children:
         [ R.div
             { className: "container mx-auto text-center relative z-10"

@@ -1,16 +1,14 @@
 module Components.Experience (experience) where
-
 import Prelude
 import React.Basic.DOM as R
 import React.Basic.Hooks as React
-
 import Components.Common (sectionTitle, addDotPerspective)
 
 experience :: React.JSX
 experience =
   R.section
     { id: "experience"
-    , className: "py-16 px-4 bg-white relative"
+    , className: "py-16 bg-white px-4 relative"
     , children:
         [ R.div
             { className: "container mx-auto relative z-10"
@@ -51,18 +49,18 @@ experienceItem :: String -> String -> String -> Array String -> React.JSX
 experienceItem company position duration descriptions =
   R.div
     { className: "bg-white p-4 md:p-6 border border-black relative overflow-hidden card-hover"
-    , style: R.css { boxShadow: "8px 8px 0 rgba(0,0,0,0.1)" }
+    , style: R.css { boxShadow: "8px 8px 0 rgba(88,110,117,0.2)" }
     , children:
         [ R.div
-            { className: "absolute top-2 right-3 text-xs text-gray-500 font-mono"
+            { className: "absolute top-2 right-3 text-xs text-gray-500 font-mono solarized-green"
             , children: [ R.text "$ history | grep work" ]
             }
         , R.h3
-            { className: "text-xl font-bold mb-1 text-black mt-6 md:mt-0"
+            { className: "text-xl font-bold mb-1 text-black mt-6 md:mt-0 solarized-blue"
             , children: [ R.text company ]
             }
         , R.div
-            { className: "text-gray-800 mb-2"
+            { className: "text-gray-800 mb-2 solarized-cyan"
             , children: [ R.text position ]
             }
         , R.div
@@ -73,7 +71,7 @@ experienceItem company position duration descriptions =
             { className: "space-y-2 text-black mb-3 md:mb-0"
             , children: map (\desc -> 
                 R.li 
-                  { className: "relative pl-5 before:content-['$'] before:absolute before:left-0 before:text-gray-500"
+                  { className: "relative pl-5 before:content-['$'] before:absolute before:left-0 before:text-gray-500 before:solarized-violet"
                   , children: [ R.text desc ]
                   }
               ) descriptions

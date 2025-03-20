@@ -1,44 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-  <rect width="400" height="400" fill="#f8f9fa"/>
-  
-  <g opacity="0.07">
-    <circle cx="80" cy="80" r="1" fill="#000"/>
-    <circle cx="160" cy="80" r="1" fill="#000"/>
-    <circle cx="240" cy="80" r="1" fill="#000"/>
-    <circle cx="320" cy="80" r="1" fill="#000"/>
+  <rect width="400" height="400" fill="#002b36"/>
+
+  <g opacity="0.2">
+    <circle cx="80" cy="80" r="1" fill="#268bd2"/>
+    <circle cx="160" cy="80" r="1" fill="#268bd2"/>
+    <circle cx="240" cy="80" r="1" fill="#268bd2"/>
+    <circle cx="320" cy="80" r="1" fill="#268bd2"/>
     
-    <circle cx="80" cy="160" r="1" fill="#000"/>
-    <circle cx="160" cy="160" r="1" fill="#000"/>
-    <circle cx="240" cy="160" r="1" fill="#000"/>
-    <circle cx="320" cy="160" r="1" fill="#000"/>
+    <circle cx="80" cy="160" r="1" fill="#268bd2"/>
+    <circle cx="160" cy="160" r="1" fill="#268bd2"/>
+    <circle cx="240" cy="160" r="1" fill="#268bd2"/>
+    <circle cx="320" cy="160" r="1" fill="#268bd2"/>
     
-    <circle cx="80" cy="240" r="1" fill="#000"/>
-    <circle cx="160" cy="240" r="1" fill="#000"/>
-    <circle cx="240" cy="240" r="1" fill="#000"/>
-    <circle cx="320" cy="240" r="1" fill="#000"/>
+    <circle cx="80" cy="240" r="1" fill="#268bd2"/>
+    <circle cx="160" cy="240" r="1" fill="#268bd2"/>
+    <circle cx="240" cy="240" r="1" fill="#268bd2"/>
+    <circle cx="320" cy="240" r="1" fill="#268bd2"/>
     
-    <circle cx="80" cy="320" r="1" fill="#000"/>
-    <circle cx="160" cy="320" r="1" fill="#000"/>
-    <circle cx="240" cy="320" r="1" fill="#000"/>
-    <circle cx="320" cy="320" r="1" fill="#000"/>
+    <circle cx="80" cy="320" r="1" fill="#268bd2"/>
+    <circle cx="160" cy="320" r="1" fill="#268bd2"/>
+    <circle cx="240" cy="320" r="1" fill="#268bd2"/>
+    <circle cx="320" cy="320" r="1" fill="#268bd2"/>
   </g>
-  
-  <rect x="100" y="100" width="200" height="200" rx="2" ry="2" fill="white" stroke="#000" stroke-width="1.5"/>
-  
-  <rect x="100" y="100" width="200" height="30" rx="2" ry="2" fill="white" stroke="#000" stroke-width="1.5"/>
-  
-  <circle cx="115" cy="115" r="3" fill="#000"/>
-  <circle cx="130" cy="115" r="3" fill="#000"/>
-  <circle cx="145" cy="115" r="3" fill="#000"/>
-  
-  <text x="120" y="170" font-family="monospace" font-size="16" fill="#000">></text>
-  
-  <text x="145" y="170" font-family="monospace" font-weight="bold" font-size="24" fill="#000">GANS</text>
-  
-  <rect x="220" y="150" width="3" height="24" fill="#000">
+
+  <rect x="100" y="100" width="200" height="200" rx="2" ry="2" fill="#073642" stroke="#839496" stroke-width="1.5"/>
+
+  <rect x="100" y="100" width="200" height="30" rx="2" ry="2" fill="#002b36" stroke="#839496" stroke-width="1.5"/>
+
+  <circle cx="115" cy="115" r="3" fill="#dc322f"/>
+  <circle cx="130" cy="115" r="3" fill="#b58900"/>
+  <circle cx="145" cy="115" r="3" fill="#859900"/>
+
+  <text x="120" y="170" font-family="monospace" font-size="16" fill="#839496">></text>
+
+  <text x="145" y="170" font-family="monospace" font-weight="bold" font-size="24" fill="#b58900">GANS</text>
+
+  <rect x="220" y="150" width="3" height="24" fill="#2aa198">
     <animate attributeName="opacity" values="1;0;1" dur="1.6s" repeatCount="indefinite"/>
   </rect>
-  
-  <path d="M300 105 L305 100 L305 300 L300 300 Z" fill="#000" opacity="0.04"/>
-  <path d="M105 300 L300 300 L305 305 L100 305 Z" fill="#000" opacity="0.04"/>
+
+  <path d="M300 105 L305 100 L305 300 L300 300 Z" fill="#268bd2" opacity="0.1"/>
+  <path d="M105 300 L300 300 L305 305 L100 305 Z" fill="#268bd2" opacity="0.1"/>
 </svg>

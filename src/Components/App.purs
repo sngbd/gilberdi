@@ -51,7 +51,7 @@ mkApp = do
       pure $ removeEventListener (EventType "hashchange") actualListener false winEventTarget
 
     pure $ R.div
-      { className: "min-h-screen bg-white text-black font-mono"
+      { className: "min-h-screen text-base font-mono"
       , children:
           [ navbar activeSection (\newSection -> setActiveSection (const newSection)) mobileMenuOpen (\newValue -> setMobileMenuOpen (const newValue))
           , skipToContent

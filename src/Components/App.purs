@@ -2,15 +2,18 @@ module Components.App (mkApp) where
 
 import Prelude
 import Data.String (drop)
-import Effect (Effect)
+import Data.Maybe (Maybe(..))
 import React.Basic.DOM as R
 import React.Basic.Hooks as React
-import React.Basic.Hooks (Component, component, useState, useEffect, (/\))
-import Web.Event.EventTarget (EventListener, eventListener, addEventListener, removeEventListener)
-import Web.Event.Event (Event, EventType(..))
+import React.Basic.Hooks (Component, component, useState, useEffect, useRef, (/\), readRef, writeRef)
+import Web.Event.EventTarget (eventListener, addEventListener, removeEventListener)
+import Web.Event.Event (EventType(..))
 import Web.HTML (window)
 import Web.HTML.Location (hash)
 import Web.HTML.Window (location, toEventTarget)
+import Foreign (unsafeToForeign)
+
+import Lenis (createLenis, startLenis, lenisScrollTo, destroyLenis)
 
 import Components.Navbar (navbar, skipToContent)
 import Components.Header (header)
@@ -26,19 +29,20 @@ mkApp = do
   component "App" \_ -> React.do
     activeSection /\ setActiveSection <- useState "home"
     mobileMenuOpen /\ setMobileMenuOpen <- useState false
+    lenisRef <- useRef Nothing
 
-    let handler :: Event -> Effect Unit
-        handler _ = do
-          win' <- window
-          loc' <- location win'
-          currentHash <- hash loc'
+    let listener = eventListener \_ -> do
+          win <- window
+          loc <- location win
+          currentHash <- hash loc
           let currentSection = if currentHash == "" then "home" else drop 1 currentHash
           setActiveSection (const currentSection)
 
-    let listener :: Effect EventListener
-        listener = eventListener handler
-
     useEffect unit do
+      lenis <- createLenis
+      initializedLenis <- startLenis lenis
+      writeRef lenisRef (Just initializedLenis)
+      
       win <- window
       loc <- location win
       initialHash <- hash loc
@@ -48,12 +52,25 @@ mkApp = do
       actualListener <- listener
       let winEventTarget = toEventTarget win
       addEventListener (EventType "hashchange") actualListener false winEventTarget
-      pure $ removeEventListener (EventType "hashchange") actualListener false winEventTarget
+      
+      pure do
+        removeEventListener (EventType "hashchange") actualListener false winEventTarget
+        lenisInstance <- readRef lenisRef
+        case lenisInstance of
+          Just l -> destroyLenis l
+          Nothing -> pure unit
 
+    let scrollToSection section = do
+          setActiveSection (const section)
+          lenisInstance <- readRef lenisRef
+          case lenisInstance of
+            Just lenis -> void $ lenisScrollTo lenis ("#" <> section) (unsafeToForeign { offset: 0, duration: 1.2 })
+            Nothing -> pure unit
+            
     pure $ R.div
       { className: "min-h-screen text-base font-mono"
       , children:
-          [ navbar activeSection (\newSection -> setActiveSection (const newSection)) mobileMenuOpen (\newValue -> setMobileMenuOpen (const newValue))
+          [ navbar activeSection scrollToSection mobileMenuOpen (\newValue -> setMobileMenuOpen (const newValue))
           , skipToContent
           , header
           , about

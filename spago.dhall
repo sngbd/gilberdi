@@ -15,6 +15,7 @@ to generate this file without the comments in this block.
 , dependencies =
   [ "console"
   , "effect"
+  , "foreign"
   , "maybe"
   , "prelude"
   , "react-basic"

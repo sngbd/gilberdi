@@ -6,7 +6,7 @@ import React.Basic.Hooks as React
 import React.Basic.Events (handler_)
 
 navbar :: String -> (String -> Effect Unit) -> Boolean -> (Boolean -> Effect Unit) -> React.JSX
-navbar activeSection setActiveSection mobileMenuOpen setMobileMenuOpen =
+navbar activeSection scrollToSection mobileMenuOpen setMobileMenuOpen =
   R.nav
     { className: "fixed w-full border-b border-black z-40 bg-white"
     , children:
@@ -20,12 +20,12 @@ navbar activeSection setActiveSection mobileMenuOpen setMobileMenuOpen =
                 , R.div
                     { className: "hidden md:flex space-x-6"
                     , children:
-                        [ navItem "HOME" "home" activeSection setActiveSection
-                        , navItem "ABOUT" "about" activeSection setActiveSection
-                        , navItem "EXPERIENCE" "experience" activeSection setActiveSection
-                        , navItem "PROJECTS" "projects" activeSection setActiveSection
-                        , navItem "SKILLS" "skills" activeSection setActiveSection
-                        , navItem "CONTACT" "contact" activeSection setActiveSection
+                        [ navItem "HOME" "home" activeSection scrollToSection
+                        , navItem "ABOUT" "about" activeSection scrollToSection
+                        , navItem "EXPERIENCE" "experience" activeSection scrollToSection
+                        , navItem "PROJECTS" "projects" activeSection scrollToSection
+                        , navItem "SKILLS" "skills" activeSection scrollToSection
+                        , navItem "CONTACT" "contact" activeSection scrollToSection
                         ]
                     }
                 , R.button
@@ -50,12 +50,12 @@ navbar activeSection setActiveSection mobileMenuOpen setMobileMenuOpen =
                         , R.div
                             { className: "flex flex-col items-center space-y-6 pt-16"
                             , children:
-                                [ mobileNavItem "HOME" "home" activeSection setActiveSection setMobileMenuOpen
-                                , mobileNavItem "ABOUT" "about" activeSection setActiveSection setMobileMenuOpen
-                                , mobileNavItem "EXPERIENCE" "experience" activeSection setActiveSection setMobileMenuOpen
-                                , mobileNavItem "PROJECTS" "projects" activeSection setActiveSection setMobileMenuOpen
-                                , mobileNavItem "SKILLS" "skills" activeSection setActiveSection setMobileMenuOpen
-                                , mobileNavItem "CONTACT" "contact" activeSection setActiveSection setMobileMenuOpen
+                                [ mobileNavItem "HOME" "home" activeSection scrollToSection setMobileMenuOpen
+                                , mobileNavItem "ABOUT" "about" activeSection scrollToSection setMobileMenuOpen
+                                , mobileNavItem "EXPERIENCE" "experience" activeSection scrollToSection setMobileMenuOpen
+                                , mobileNavItem "PROJECTS" "projects" activeSection scrollToSection setMobileMenuOpen
+                                , mobileNavItem "SKILLS" "skills" activeSection scrollToSection setMobileMenuOpen
+                                , mobileNavItem "CONTACT" "contact" activeSection scrollToSection setMobileMenuOpen
                                 ]
                             }
                         ]
@@ -66,22 +66,22 @@ navbar activeSection setActiveSection mobileMenuOpen setMobileMenuOpen =
     }
 
 navItem :: String -> String -> String -> (String -> Effect Unit) -> React.JSX
-navItem label id activeSection setActiveSection =
+navItem label id activeSection scrollToSection =
   R.a
     { className: "cursor-pointer hover:text-gray-600 transition-colors duration-200 " 
                  <> if activeSection == id then "text-black underline solarized-violet" else "text-gray-800"
-    , onClick: handler_ (setActiveSection id)
+    , onClick: handler_ (scrollToSection id)
     , href: "#" <> id
     , children: [ R.text (">" <> label) ]
     }
 
 mobileNavItem :: String -> String -> String -> (String -> Effect Unit) -> (Boolean -> Effect Unit) -> React.JSX
-mobileNavItem label id activeSection setActiveSection setMobileMenuOpen =
+mobileNavItem label id activeSection scrollToSection setMobileMenuOpen =
   R.a
     { className: "cursor-pointer hover:text-gray-600 transition-colors duration-200 py-4 text-lg " 
                  <> if activeSection == id then "text-black font-bold solarized-violet" else "text-gray-800"
     , onClick: handler_ do
-        setActiveSection id
+        scrollToSection id
         setMobileMenuOpen false
     , href: "#" <> id
     , children: [ R.text (">" <> label) ]

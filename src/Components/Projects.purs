@@ -12,6 +12,10 @@ type Technology =
   , logo :: String
   }
 
+data ProjectLink
+  = GitHub String
+  | YouTube String
+
 getTechLogo :: String -> String
 getTechLogo tech = case tech of
   "PureScript" -> "/images/logos/purescript.svg"
@@ -45,29 +49,29 @@ projects =
                             "Gilberdi's Portfolio" 
                             "This website." 
                             (techsWithLogos [ "PureScript", "Tailwind CSS" ])
-                            "https://github.com/sngbd/gilberdi"
+                            (GitHub "https://github.com/sngbd/gilberdi")
                             (Just "https://gilberdi.vercel.app")
                             "/images/projects/gilberdi-portfolio.png"
                         , projectItem 
                             "Decodream" 
                             "IC-blockchain-based platform that analyzes and transforms dreams into digital art using AI technology."
                             (techsWithLogos [ "React.js", "Motoko", "Sass" ])
-                            "https://github.com/sngbd/decodream"
+                            (GitHub "https://github.com/sngbd/decodream")
                             Nothing
                             "/images/projects/decodream.png"
                         , projectItem 
                             "Mona Coffee" 
                             "Android application for a coffee shop with focus on variety of service types."
                             (techsWithLogos [ "Flutter", "Firebase" ])
-                            "https://github.com/sngbd/mona-coffee"
+                            (GitHub "https://github.com/sngbd/mona-coffee")
                             Nothing
                             "/images/projects/mona-coffee.png"
                         , projectItem 
                             "Last Boxd" 
-                            "Generate a collage based on Letterboxd user's latest diary."
-                            (techsWithLogos [ "Go", "Svelte" ])
-                            "https://github.com/sngbd/last-boxd"
-                            (Just "https://last-boxd.vercel.app")
+                            "Generate, customize, and share beautiful high-quality collages of a Letterboxd diary."
+                            (techsWithLogos [ "Go", "Svelte", "Firebase" ])
+                            (YouTube "https://youtu.be/JUEiooj9VGQ")
+                            (Just "https://last-boxd.web.id")
                             "/images/projects/last-boxd.png"
                         ]
                     }
@@ -77,8 +81,8 @@ projects =
         ]
     }
 
-projectItem :: String -> String -> Array Technology -> String -> Maybe String -> String -> React.JSX
-projectItem title description technologies githubUrl websiteUrl imageSrc =
+projectItem :: String -> String -> Array Technology -> ProjectLink -> Maybe String -> String -> React.JSX
+projectItem title description technologies projectLink websiteUrl imageSrc =
   R.div
     { className: "block bg-white p-4 md:p-6 border border-black card-hover"
     , style: R.css { boxShadow: "8px 8px 0 rgba(38, 139, 210, 0.2)" }
@@ -124,19 +128,35 @@ projectItem title description technologies githubUrl websiteUrl imageSrc =
         , R.div
             { className: "mt-4 flex gap-4 items-center"
             , children: 
-                [ R.a
-                    { href: githubUrl
-                    , target: "_blank"
-                    , rel: "noopener noreferrer"
-                    , className: "text-sm text-gray-600 flex items-center hover:text-solarized-blue hover:underline transition-all duration-300 link-glow-blue"
-                    , children: 
-                        [ R.text "View on GitHub "
-                        , R.span 
-                            { className: "ml-1"
-                            , children: [ R.text "→" ]
-                            }
-                        ]
-                    }
+                [ case projectLink of
+                    GitHub url ->
+                      R.a
+                        { href: url
+                        , target: "_blank"
+                        , rel: "noopener noreferrer"
+                        , className: "text-sm text-gray-600 flex items-center hover:text-solarized-blue hover:underline transition-all duration-300 link-glow-blue"
+                        , children: 
+                            [ R.text "View on GitHub "
+                            , R.span 
+                                { className: "ml-1"
+                                , children: [ R.text "→" ]
+                                }
+                            ]
+                        }
+                    YouTube url ->
+                      R.a
+                        { href: url
+                        , target: "_blank"
+                        , rel: "noopener noreferrer"
+                        , className: "text-sm text-gray-600 flex items-center hover:text-solarized-red hover:underline transition-all duration-300 link-glow-red"
+                        , children: 
+                            [ R.text "View on YouTube "
+                            , R.span 
+                                { className: "ml-1"
+                                , children: [ R.text "→" ]
+                                }
+                            ]
+                        }
                 , case websiteUrl of
                     Just url ->
                       R.a

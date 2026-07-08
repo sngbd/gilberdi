@@ -12,7 +12,7 @@ footer =
             , children:
                 [ R.p
                     { className: "text-gray-600 text-sm"
-                    , children: [ R.text "© 2025 Gilberdi Axel Nathaniel Sinaga. All rights reserved." ]
+                    , children: [ R.text "© 2026 Gilberdi Axel Nathaniel Sinaga. All rights reserved." ]
                     }
                 ]
             }

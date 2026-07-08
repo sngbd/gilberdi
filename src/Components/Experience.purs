@@ -18,6 +18,13 @@ experience =
                     { className: "space-y-8 mt-8"
                     , children:
                         [ experienceItem 
+                            "Systatum" 
+                            "Intern Member of Technical Staff" 
+                            "May 2025 - November 2025"
+                            [ "Gara: Researched and implemented an interpreter in Go using ANTLR4 for Gara, a programming language designed to help Indonesian students learn to code through familiar, native-language syntax."
+                            , "Workaty: Led DevOps infrastructure setup using Capistrano and Microsoft Azure for Workaty, an HR operating system. Developed rbacr, and integrated it into the backend. Contributed to backend feature development in Crystal with PostgreSQL, and collaborated with the frontend team to align API contracts and ensure smooth integration across the stack."
+                            ]
+                        , experienceItem 
                             "PT Smut Tech Indonesia" 
                             "Software Engineer (Internship)" 
                             "July 2024 - October 2024"

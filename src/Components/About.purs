@@ -51,7 +51,7 @@ about =
                                 , educationItem 
                                     "Universitas Sumatera Utara" 
                                     "Bachelor of Science in Computer Science" 
-                                    "June 2021 – Expected August 2025" 
+                                    "June 2021 – Expected November 2026" 
                                     "GPA: 3.97"
                                 , educationItem 
                                     "Universiti Teknologi MARA" 

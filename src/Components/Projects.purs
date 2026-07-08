@@ -27,6 +27,9 @@ getTechLogo tech = case tech of
   "Firebase" -> "/images/logos/firebase.svg"
   "Go" -> "/images/logos/go.svg"
   "Svelte" -> "/images/logos/svelte.svg"
+  "Crystal" -> "/images/logos/crystal.svg"
+  "Ruby" -> "/images/logos/ruby.svg"
+  "Microsoft Azure" -> "/images/logos/azure.svg"
   _ -> "/images/logos/code.svg"
 
 techsWithLogos :: Array String -> Array Technology
@@ -60,15 +63,15 @@ projects =
                             Nothing
                             "/images/projects/decodream.png"
                         , projectItem 
-                            "Mona Coffee" 
-                            "Android application for a coffee shop with focus on variety of service types."
-                            (techsWithLogos [ "Flutter", "Firebase" ])
-                            (GitHub "https://github.com/sngbd/mona-coffee")
+                            "rbacr" 
+                            "Role-Based Access Control Library for the Crystal Programming Language."
+                            (techsWithLogos [ "Crystal" ])
+                            (GitHub "https://github.com/systatum/rbacr")
                             Nothing
-                            "/images/projects/mona-coffee.png"
+                            "/images/projects/rbacr.png"
                         , projectItem 
                             "Last Boxd" 
-                            "Generate, customize, and share beautiful high-quality collages of a Letterboxd diary."
+                            "Generates and customizes high-quality collages of films and Letterboxd diary"
                             (techsWithLogos [ "Go", "Svelte", "Firebase" ])
                             (YouTube "https://youtu.be/JUEiooj9VGQ")
                             (Just "https://last-boxd.web.id")

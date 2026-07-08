@@ -1,44 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-  <rect width="400" height="400" fill="#002b36"/>
+  <!-- Modern slate/indigo background -->
+  <rect width="400" height="400" fill="#060913"/>
 
-  <g opacity="0.2">
-    <circle cx="80" cy="80" r="1" fill="#268bd2"/>
-    <circle cx="160" cy="80" r="1" fill="#268bd2"/>
-    <circle cx="240" cy="80" r="1" fill="#268bd2"/>
-    <circle cx="320" cy="80" r="1" fill="#268bd2"/>
+  <!-- Subtle grid pattern in the background -->
+  <g opacity="0.15">
+    <circle cx="80" cy="80" r="1.5" fill="#6366f1"/>
+    <circle cx="160" cy="80" r="1.5" fill="#6366f1"/>
+    <circle cx="240" cy="80" r="1.5" fill="#6366f1"/>
+    <circle cx="320" cy="80" r="1.5" fill="#6366f1"/>
     
-    <circle cx="80" cy="160" r="1" fill="#268bd2"/>
-    <circle cx="160" cy="160" r="1" fill="#268bd2"/>
-    <circle cx="240" cy="160" r="1" fill="#268bd2"/>
-    <circle cx="320" cy="160" r="1" fill="#268bd2"/>
+    <circle cx="80" cy="160" r="1.5" fill="#6366f1"/>
+    <circle cx="160" cy="160" r="1.5" fill="#6366f1"/>
+    <circle cx="240" cy="160" r="1.5" fill="#6366f1"/>
+    <circle cx="320" cy="160" r="1.5" fill="#6366f1"/>
     
-    <circle cx="80" cy="240" r="1" fill="#268bd2"/>
-    <circle cx="160" cy="240" r="1" fill="#268bd2"/>
-    <circle cx="240" cy="240" r="1" fill="#268bd2"/>
-    <circle cx="320" cy="240" r="1" fill="#268bd2"/>
+    <circle cx="80" cy="240" r="1.5" fill="#6366f1"/>
+    <circle cx="160" cy="240" r="1.5" fill="#6366f1"/>
+    <circle cx="240" cy="240" r="1.5" fill="#6366f1"/>
+    <circle cx="320" cy="240" r="1.5" fill="#6366f1"/>
     
-    <circle cx="80" cy="320" r="1" fill="#268bd2"/>
-    <circle cx="160" cy="320" r="1" fill="#268bd2"/>
-    <circle cx="240" cy="320" r="1" fill="#268bd2"/>
-    <circle cx="320" cy="320" r="1" fill="#268bd2"/>
+    <circle cx="80" cy="320" r="1.5" fill="#6366f1"/>
+    <circle cx="160" cy="320" r="1.5" fill="#6366f1"/>
+    <circle cx="240" cy="320" r="1.5" fill="#6366f1"/>
+    <circle cx="320" cy="320" r="1.5" fill="#6366f1"/>
   </g>
 
-  <rect x="100" y="100" width="200" height="200" rx="2" ry="2" fill="#073642" stroke="#839496" stroke-width="1.5"/>
+  <!-- Glowing outer effect for Terminal Window -->
+  <rect x="71" y="71" width="258" height="258" rx="16" ry="16" fill="#6366f1" opacity="0.1" filter="blur(8px)"/>
 
-  <rect x="100" y="100" width="200" height="30" rx="2" ry="2" fill="#002b36" stroke="#839496" stroke-width="1.5"/>
+  <!-- Glassmorphic Terminal Window -->
+  <rect x="75" y="75" width="250" height="250" rx="12" ry="12" fill="#0d1426" stroke="#6366f1" stroke-width="1.5" stroke-opacity="0.3"/>
 
-  <circle cx="115" cy="115" r="3" fill="#dc322f"/>
-  <circle cx="130" cy="115" r="3" fill="#b58900"/>
-  <circle cx="145" cy="115" r="3" fill="#859900"/>
+  <!-- Terminal Header Separator -->
+  <line x1="75" y1="115" x2="325" y2="115" stroke="#6366f1" stroke-width="1.5" stroke-opacity="0.3"/>
 
-  <text x="120" y="170" font-family="monospace" font-size="16" fill="#839496">></text>
+  <!-- Window Controls -->
+  <circle cx="95" cy="95" r="5" fill="#ef4444"/>
+  <circle cx="115" cy="95" r="5" fill="#f59e0b"/>
+  <circle cx="135" cy="95" r="5" fill="#10b981"/>
 
-  <text x="145" y="170" font-family="monospace" font-weight="bold" font-size="24" fill="#b58900">GANS</text>
+  <!-- Terminal Title/Path -->
+  <text x="200" y="99" font-family="'JetBrains Mono', 'Space Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="middle" opacity="0.6">user@portfolio:~</text>
 
-  <rect x="220" y="150" width="3" height="24" fill="#2aa198">
-    <animate attributeName="opacity" values="1;0;1" dur="1.6s" repeatCount="indefinite"/>
+  <!-- Command Line Prompt -->
+  <text x="95" y="225" font-family="'JetBrains Mono', 'Space Mono', monospace" font-size="24" font-weight="bold" fill="#38bdf8">></text>
+
+  <!-- Command Output -->
+  <text x="122" y="225" font-family="'JetBrains Mono', 'Space Mono', monospace" font-weight="bold" font-size="30" fill="#22d3ee" letter-spacing="0.5">GANS</text>
+
+  <!-- Orange Blinking Cursor -->
+  <rect x="208" y="200" width="10" height="28" fill="#fb923c">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
   </rect>
-
-  <path d="M300 105 L305 100 L305 300 L300 300 Z" fill="#268bd2" opacity="0.1"/>
-  <path d="M105 300 L300 300 L305 305 L100 305 Z" fill="#268bd2" opacity="0.1"/>
 </svg>

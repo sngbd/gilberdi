@@ -39,9 +39,11 @@ skillsSection =
                             "Programming Languages" 
                             [ { name: "JavaScript", logo: "/images/logos/javascript.svg" }
                             , { name: "TypeScript", logo: "/images/logos/typescript.svg" }
+                            , { name: "Ruby", logo: "/images/logos/ruby.svg" }
+                            , { name: "Crystal", logo: "/images/logos/crystal.svg" }
+                            , { name: "Go", logo: "/images/logos/go.svg" }
                             , { name: "Dart", logo: "/images/logos/dart.svg" }
                             , { name: "Python", logo: "/images/logos/python.svg" }
-                            , { name: "Go", logo: "/images/logos/go.svg" }
                             , { name: "PHP", logo: "/images/logos/php.svg" }
                             , { name: "Bash", logo: "/images/logos/bash.svg" }
                             ]
@@ -50,7 +52,6 @@ skillsSection =
                             [ { name: "PostgreSQL", logo: "/images/logos/postgresql.svg" }
                             , { name: "MySQL", logo: "/images/logos/mysql.svg" }
                             , { name: "SQLite", logo: "/images/logos/sqlite.svg" }
-                            , { name: "Cloud Firestore", logo: "/images/logos/firestore.svg" }
                             ]
                         , skillCategory 
                             "Tools" 
@@ -59,7 +60,7 @@ skillsSection =
                             , { name: "Neovim", logo: "/images/logos/neovim.svg" }
                             , { name: "Git", logo: "/images/logos/git.svg" }
                             , { name: "Node.js", logo: "/images/logos/nodejs.svg" }
-                            , { name: "Firebase", logo: "/images/logos/firebase.svg" }
+                            , { name: "Microsoft Azure", logo: "/images/logos/azure.svg" }
                             ]
                         ]
                     }

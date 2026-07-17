@@ -71,7 +71,7 @@ projects =
                             "/images/projects/rbacr.png"
                         , projectItem 
                             "Last Boxd" 
-                            "Generates and customizes high-quality collages of films and Letterboxd diary"
+                            "Generates highly customizable film collages from Letterboxd data."
                             (techsWithLogos [ "Go", "Svelte", "Firebase" ])
                             (YouTube "https://youtu.be/JUEiooj9VGQ")
                             (Just "https://last-boxd.web.id")
